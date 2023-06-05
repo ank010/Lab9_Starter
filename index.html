@@ -87,7 +87,7 @@
     </section>
   </main>
 
-  
+
   <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
     window.TrackJS && TrackJS.install({
@@ -218,20 +218,18 @@
     }
 
     //step 5
+
     window.onerror = (message, url, line, col, error) => {
       console.log(`message: ${message}`);
+      /*
       console.log(`url: ${url}`);
       console.log(`line: ${line}`);
       console.log(`col: ${col}`);
+      */
       console.log(`error: ${error}`);
       console.log("Logging this message through window.onerror!");
-      
+
     }
-    function causeAnError() {
-      alert("Hey how's it going? Something is about to happen");
-      awhoops("Looks like we have an error");
-    }
-    causeAnError();
 
     TrackJS.track('Testing TrackJS!');
 
