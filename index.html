@@ -54,7 +54,7 @@
     <form>
       <fieldset>
         <legend>Error Calculator</legend>
-        <input name="first-num" id="first-num" />
+        <!--<input name="first-num" id="first-num" />-->
         <select name="operator" id="operator">
           <option>+</option>
           <option>-</option>
@@ -87,6 +87,15 @@
     </section>
   </main>
 
+  
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({
+      token: "82ddff4479a04842bdf52e48a03ad293"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +111,130 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    //Step 2
+    errorBtns[0].addEventListener("click", () => {
+      console.log("Console Log Demo");
+    });
+    errorBtns[1].addEventListener("click", () => {
+      console.error("Console Error Demo");
+    });
+    errorBtns[2].addEventListener("click", () => {
+      console.count("Console count");
+    });
+    errorBtns[3].addEventListener("click", () => {
+      console.warn("Console Warn Demo");
+    });
+    errorBtns[4].addEventListener("click", () => {
+      console.assert(false, "This is not a console assert demo");
+    });
+    errorBtns[5].addEventListener("click", () => {
+      console.clear();
+    });
+    errorBtns[6].addEventListener("click", () => {
+      console.dir(errorBtns[6]);
+    });
+    errorBtns[7].addEventListener("click", () => {
+      console.dirxml(errorBtns[7]);
+    });
+    errorBtns[8].addEventListener("click", () => {
+      console.group();
+      console.log("Start of next level");
+    });
+    errorBtns[9].addEventListener("click", () => {
+      console.groupEnd();
+      console.log("Back to previous level");
+    });
+    errorBtns[10].addEventListener("click", () => {
+      console.table(["Hey", "How", "Are", "You", "?"]);
+    });
+    errorBtns[11].addEventListener("click", () => {
+      console.time("Console timer");
+
+    });
+    errorBtns[12].addEventListener("click", () => {
+      console.timeEnd("Console timer");
+
+    });
+    errorBtns[13].addEventListener("click", () => {
+      function outer() {
+        function firstIn() {
+          function deepest() {
+            console.trace();
+          }
+          deepest();
+        }
+        firstIn();
+      }
+      outer();
+    });
+    errorBtns[14].addEventListener("click", () => {
+      console.log("About to throw a global error...");
+      randomVar;
+    })
+
+    //Step 3
+    try {
+      let firstNum = document.getElementById('first-num').value;
+    } catch (err) {
+      console.error("Error generated in Step 3: " + err);
+    } finally {
+      let randomInt = 5;
+      console.log(`This variable was set in finally block: ${randomInt}`);
+    }
+
+    //Step 4
+    class ValidationError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "ValidationError";
+      }
+    }
+
+    function test() {
+      throw new ValidationError("Something is Wrong");
+    }
+
+    function readClothesType(json) {
+      let clothing = JSON.parse(json);
+
+      if (!clothing.price) {
+        throw new ValidationError("No field: price");
+      }
+      if (!clothing.type) {
+        throw new ValidationError("No field: type");
+      }
+      return user;
+    }
+    try {
+      let newClothes = readClothesType('{ "price": "$25" }');
+    } catch (err) {
+      if (err instanceof ValidationError) {
+        console.error("Invalid data: " + err.message);
+      } else if (err instanceof SyntaxError) {
+        console.error("JSON Syntax Error");
+      } else {
+        throw err;
+      }
+    }
+
+    //step 5
+    window.onerror = (message, url, line, col, error) => {
+      console.log(`message: ${message}`);
+      console.log(`url: ${url}`);
+      console.log(`line: ${line}`);
+      console.log(`col: ${col}`);
+      console.log(`error: ${error}`);
+      console.log("Logging this message through window.onerror!");
+      
+    }
+    function causeAnError() {
+      alert("Hey how's it going? Something is about to happen");
+      awhoops("Looks like we have an error");
+    }
+    causeAnError();
+
+    TrackJS.track('Testing TrackJS!');
+
   </script>
 </body>
 
